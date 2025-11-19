@@ -1,7 +1,5 @@
 FROM python:3.12-slim-bookworm AS base
 
-ENV PYTHONUNBUFFERED=1
-
 RUN apt-get update && apt-get install -y \
     wget \
     xz-utils \
@@ -17,5 +15,4 @@ COPY app.py .
 
 EXPOSE 5000
 
-# CMD ["python", "app.py"]
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5000"]
