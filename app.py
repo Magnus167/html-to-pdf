@@ -12,6 +12,11 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="HTML to PDF Service")
 
 
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
+
 def convert_to_inches(value: str) -> str:
     """Convert mm/cm/in string to inches string."""
     value = value.strip()

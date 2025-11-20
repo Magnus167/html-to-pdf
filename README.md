@@ -16,16 +16,22 @@ Access API docs at `http://localhost:5000/docs`.
 
 Send a `POST` request to `/` with either Raw HTML or a JSON payload.
 
-### 1. Raw HTML
+### Check if the service is running
+
+```bash
+curl http://localhost:5000/health
+```
+
+### Simple run - no additional options
 
 ```bash
 curl -X POST -d "<h1>Hello</h1>" \
   -H "Content-Type: text/html" \
   --output result.pdf \
-  "http://localhost:5000?page-size=A4&margin-top=20mm"
+  http://localhost:5000
 ```
 
-### 2. JSON Payload
+### Passing options as a JSON payload
 
 ```bash
 curl -X POST \
@@ -42,7 +48,16 @@ curl -X POST \
   http://localhost:5000
 ```
 
-### Options
+### Passing options as query parameters
+
+```bash
+curl -X POST -d "<h1>Hello</h1>" \
+  -H "Content-Type: text/html" \
+  --output result.pdf \
+  "http://localhost:5000?page-size=A4&margin-top=20mm&background=true"
+```
+
+### Available Options
 
 - `page-size` (e.g., A4, Letter)
 - `orientation` (Portrait, Landscape)
